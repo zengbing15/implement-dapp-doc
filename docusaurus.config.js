@@ -5,16 +5,16 @@ const darkCodeTheme = require('prism-react-renderer/themes/dracula');
 module.exports = {
   title: 'My Site',
   tagline: 'Dinosaurs are cool',
-  url: 'https://your-docusaurus-test-site.com',
-  baseUrl: '/',
+  url: 'https://zengbing15.github.io',
+  baseUrl: '/implement-dapp-docs/',
   onBrokenLinks: 'throw',
   onBrokenMarkdownLinks: 'warn',
   favicon: 'img/favicon.ico',
-  organizationName: 'facebook', // Usually your GitHub org/user name.
-  projectName: 'docusaurus', // Usually your repo name.
+  organizationName: 'zengbing15', // Usually your GitHub org/user name.
+  projectName: 'implement-dapp-docs', // Usually your repo name.
   themeConfig: {
     navbar: {
-      title: 'Implement DApp on CKB layer1',
+      title: 'Implement your first DApp',
       /*
       logo: {
         alt: 'My Site Logo',
@@ -33,7 +33,7 @@ module.exports = {
        
         /* {to: '/blog', label: 'Blog', position: 'left'},*/
         {
-          href: 'https://github.com/zengbing15/implement-dapp-doc',
+          href: 'https://github.com/zengbing15/implement-dapp-docs',
           label: 'Docs GitHub',
           position: 'right',
         },
@@ -48,7 +48,7 @@ module.exports = {
             {
               label: 'Github',
               /*to: '/docs/intro',*/
-              href: 'https://github.com/zengbing15/implement-dapp-doc',
+              href: 'https://github.com/zengbing15/implement-dapp-docs',
             },
           ],
         },
