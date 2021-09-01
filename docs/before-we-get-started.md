@@ -4,28 +4,29 @@ sidebar_position: 2
 
 # Before We Get Started
 
-## DApp 和 Web App 有何不同？
+## What's the difference between DApp and Web App?
 
-相信你已经具备了开发 web App 的技能（很可能比我更精通 ORZ ）为了帮助你理解 DApp，先来看看 DApp 和 App 的不同之处吧。注意 ,本文所指的 DApp 都是运行在 CKB 上的 DApp，由于 CKB 的独特性，DApp 的开发方式和其他区块链上的 DApp ，尤其是 Ethereum 上的 DApp 有很大不同，所以开始之前请先把你的“杯子”倒空哦~
+I'm sure you already have the skills to develop web apps (probably more than I do).
+To help you understand DApps, let's take a look at the differences between DApps and Apps.
+
+:::note
+The DApps mentioned in this doc site are all DApps running on CKB layer1. Due to the uniqueness of Nervos CKB network, DApps are developed in a very different way than DApps on other blockchains, especially Ethereum, so please empty your cup first.
+:::
 
 APP 
-
-* 客户端
-* 发送请求的方式：HTTP 
-* 后端：编写后端服务程序，根据客户端请求做出不同的响应。
-* Web服务器， nginx/apache
+* Client 
+* Send requests through HTTP 
+* Back-end: write programs that respond to requests.
+* Web server, such as nginx/apache
 
 [Image: image.png]
 
 DApp
-
-* 客户端
-* 发送请求的方式：RPC
-* 后端: 发交易跟链交互，根据客户端的请求做出不同的响应
-*  CKB Network 
+* Client 
+* Send requests through RPC
+* Back-end: send transactions that respond to requests.
+* CKB network 
 
 [Image: image.png]
-所以 web APP 和 DApp 的客户端表现是一致的，重点是后端和发送请求的实现方式，所以本文档会重点介绍 DApp 与 web App 开发不一样的地方，再强调一遍，我并不会把所有知识一股脑给到你，而是先从一段调用 RPC 的代码开始，逐步介绍 DApp 的开发方式和需要了解的 CKB 概念及工具，如果你需要直接了解全貌，请看 Conculsion 部分。
 
-智能合约部分的编写
-实现客户端和智能合约的交互
+The client side of web app and DApps are almost the same, you should focus on the implementation of back-end and RPC, so let's look at RPC and transaction first.

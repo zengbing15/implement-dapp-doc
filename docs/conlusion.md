@@ -1,12 +1,11 @@
 ---
+id: conclusion
+title: Conclusion
 sidebar_position: 7
 ---
 
-# Conclusion
 
 ## About CKB
-
-
 
 ## Felix bot: A DApp demo on CKB layer1
 
@@ -78,20 +77,12 @@ The transfer-tx DApp demo is based on Lumos functionalities to implement the mos
 
 ## To be Continued
 
-### ckb-indexer / mercury
+### Mercury
 
-目前可以使用 ckb-indexer 来作为 cell Provider 
+后续 lumos 会进行优化，只依赖 mercury，变成一个纯前端的库。 Mercury is a tool that handles applications development on CKB. Mercury is like the bridge between CKB and applications. It provides useful RPC services for DApps that are built upon Lumos,
+see [Github repo](https://github.com/nervosnetwork/mercury).
 
-lumos indexer 依赖的是 ckb-indexer 实现的，目前是 v0.1.  开发上可能会有些不便，最新的 ckb-indexer 是 v  可以使用
-
-transaction-manager to 
-
-
-后续 Lumos 即将变成纯前端的库，lumos 之后也会进化成只依赖 mercury，变成一个纯前端的库, mercury docs  是什么 XXX
-敬请期待
-
-
-### Godwoken: Account Model and Cell Model
+### Godwoken
 
 思考: CKB 与 以太坊 编程模型的不同之处 提到 CKB 与 以太坊 编程模型 有本质不同，以太坊链上状态在 EVM 执行过交易之后才能确定。而 CKB 链下构建完交易之后，链上状态已经通过交易的 output 确定了，链上只是对交易的合法性进行验证，不会改变交易结果。不过虽然编程模型不同， Ethereum dApp 开发者如果想在 CKB 上开发，不需要重新学习一套新的编程模型和工具。
 
@@ -103,17 +94,21 @@ CKB 开发团队开发了一套 layer2 解决方案：Godwoken [godwoken](https:
 
 ## References
 
-* Nervos Document Website  https://docs.nervos.org/
-* Lumos-doc https://cryptape.github.io/lumos-doc/
-* [CKB-CLI](https://github.com/nervosnetwork/ckb-cli). CKB command line tool written in Rust.
-* [Molecule](https://github.com/nervosnetwork/molecule). Serialization system used on CKB.
-* ckb-js-toolkit
-* Nervos Network RFCs: https://github.com/nervosnetwork/rfcs
-* CKB system scripts: https://github.com/nervosnetwork/ckb-system-scripts
-* mercury  
-* About Nervos CKB 设计原理   https://medium.com/@janhxie
-* About CKB Programing: https://xuejie.space/
-* [CKB Docs.](https://docs.ckb.dev/) Documents in Chinese maintained by community.
+* Documentation
+    * Nervos Document Website  https://docs.nervos.org/
+    * Lumos-doc https://cryptape.github.io/lumos-doc/
+    * Nervos Network RFCs: https://github.com/nervosnetwork/rfcs
+* Tools
+    * [Tippy](https://github.com/nervosnetwork/tippy)
+    * CKB-CLI (https://github.com/nervosnetwork/ckb-cli). CKB command line tool written in Rust.
+    * ckb-js-toolkit
+    * Molecule (https://github.com/nervosnetwork/molecule). Serialization system used on CKB.
+    * CKB system scripts: https://github.com/nervosnetwork/ckb-system-scripts
+    * mercury  
+    * ckb-indexer
+* Blogs
+    * About Nervos CKB 设计原理   https://medium.com/@janhxie
+    * About CKB Programing: https://xuejie.space/
 
 
 

@@ -1,34 +1,32 @@
 ---
+id: rpc-and-transaction
+title: RPC and Transaction
 sidebar_position: 3
 ---
 
-# Implement a Transfer-Tx DApp demo 所需知识
+## RPC
 
-## Set Up the Development Environment 
+First run a CKB node,then use @ckb-lumos/rpc (the RPC component in [Lumos](https://github.com/nervosnetwork/lumos)) to interact with CKB network，communicating block and transaction information with CKB nodes.
 
-CKB DApps can be developed on all major platforms, including Linux, Windows, and macOS. 请参考 [Set Up the Development Environment](https://cryptape.github.io/lumos-doc/docs/preparation/setupsystem)  根据你的 Operating System 配置开发环境。
+:::info
+Lumos is a very handy development tool. CKB DApps can be developed upon lumos. [A transfer-tx DApp demo](transfer-tx-dapp-demo) will introduce how to develop DApps upon lumos step by step. 
+:::
 
-##  Connect to CKB node through RPC
+### Set Up the Development Environment 
 
-前面提到 APP 会通过一个HTTP的请求发到服务器，从而调用对应的后端服务程序，DApp 则是通过 RPC connect to CKB  Network 中的 nodes. 
-[Image: image.png]
-所以方法很简单：本地运行一个 CKB 节点，然后再调用 RPC 接口。这里会用到一个非常好用的开发工具：lumos , CKB DApps  can be developed upon lumos. 后面会逐步介绍如何使用 lumos 开发 DApp。先来看用  lumos 的 rpc component(package)调用 RPC 接口，文字没有实感，来动手实践吧：
+See[Set Up the Development Environment](https://cryptape.github.io/lumos-doc/docs/preparation/setupsystem),then you will run a CKB node on Dev Chain by using [Tippy](https://github.com/nervosnetwork/tippy).
 
-### Run a CKB Node on DEV Chain by Using Tippy
+An example of Tippy's dashboard 
 
-如果你已经完成开发环境的配置，那么你已经运行了一个 CKB Node on Dev Chain 了
+![Example dashboard](../static/img/tippy-dashboard.png)
 
-click here to view dashboard ：
-[Image: image.png]
-### Call RPC interface to get blockchain info
-
-Use `@ckb-lumos/rpc` . The RPC component (`@ckb-lumos/rpc`) interacts with the CKB network, communicating block and transaction information with CKB nodes.
+###  Connect to CKB node through RPC
 
 ```
 $yarn add @ckb-lumos/rpc
 ```
 
-请求获取 blockchain info
+Get the blockchain info
 
 ```
 const { RPC } = require(`"@ckb-lumos/rpc"`);
@@ -40,26 +38,47 @@ async function main(){
 main();
 ```
 
-这时候你就会获得 blockchain info, 有求必应的感觉还不错吧~
+An example of the blockchain info:
 
+```
+  alerts: [],
+  chain: 'ckb_dev',
+  difficulty: '0x100',
+  epoch: '0x64005b0000bc',
+  is_initial_block_download: false,
+  median_time: '0x17b9c952a1d'
+```  
+The full code of the example can be found [here](https://github.com/zengbing15/simple-dapp-demo/tree/main/call-rpc).
+
+Great! Now you have got your foot in the door! 
 
 ## A transfer transaction on CKB Testnet
 
-DApp 和 App 后端最大的不同在于DApp 是通过发交易与 CKB 交互的，所以理解 CKB 的交易是非常重要的，this section 可能涉及到的概念比较多，不过不用担心，我还是会和实践相结合，力求能让大家更容易理解。
+At its core, a blockchain is a [replicated deterministic state machine](https://en.wikipedia.org/wiki/State_machine_replication).A state machine is a computer science concept whereby a machine can have multiple states, but only one at any given time. There is a state, which describes the current state of the system, and `transactions`, that trigger state transitions.Given a state S and a transaction T, the state machine will return a new state S'.
 
-区块链可以看作是状态机，记录着链上状态，每次有新的交易被打包进入区块提交上链，都意味着区块链根据协议中定义的状态转换逻辑进行了状态转换, Nervos CKB Layer1 也遵循着这样的逻辑。先来看一笔发生在 CKB Aggron Testnet 上的转账交易 （转账交易结构比较简单），这笔转账交易实际上是发送方转给接收方一些 CKB, 可以表示成，
-发送方地址：ckt1qyqddquttee9zqlj7xlmtrd7vjunp2zh5f3spa2vjy
-接收方地址：ckt1qyqv70xf5cusptp0gwzqj8ewsen7j2c0aa8sq5d7y6
+```
++--------+                 
+|        |                 
+| State  |  
+|        |             
++--------+                 
+    |
+    | transactions
+    |
++--------+                 
+|        |                 
+| State' |  
+|        |             
++--------+ 
 
-* Input: 
-    * 发送方 原状态
-* Output
-    * 接收方  状态
-    * 发送方 新状态
+```
 
+Nervos CKB Layer1 also follows this logic, the following is a transfer transaction on CKB Aggron Testnet, the following is the state transition triggered by the transfer transaction:
 
-不过交易代码乍一看有点复杂，没关系，我们把交易拆分成两部分： Inputs and Outputs ，cell_deps and witnesses
+The payer's address：ckt1qyqddquttee9zqlj7xlmtrd7vjunp2zh5f3spa2vjy
+The recipient's address：ckt1qyqv70xf5cusptp0gwzqj8ewsen7j2c0aa8sq5d7y6
 
+An example of transfer transaction on CKB Aggron Testnet
 
 ```
 {
@@ -111,7 +130,7 @@ DApp 和 App 后端最大的不同在于DApp 是通过发交易与 CKB 交互的
 }
 ```
 
-
+The transaction JSON code looks a bit complicated, don't panic, let's look through `Inputs and Outputs` first. 
 
 
 ### Inputs and Outputs
@@ -150,7 +169,7 @@ DApp 和 App 后端最大的不同在于DApp 是通过发交易与 CKB 交互的
   ],
 ```
 
-你可能发现了 outputs 中 有两个结构类似的 object（inputs 暂时放在一边，先不去管它）
+You may find that there are two objects in the `outputs` that are similar in structure (put aside the `inputs` now).
 
 ```
   "outputs": [
@@ -178,55 +197,49 @@ DApp 和 App 后端最大的不同在于DApp 是通过发交易与 CKB 交互的
 ```
 
 
-You get it!  这个叫做  Cell ( 这可是 CKB 最棒的东西了！)
+You got it!  This is called `Cell` which is the best design about Nervos CKB!
 
 ### Cell 
 
-Cell 是 CKB 中最基本的状态单元。所以交易可以表示成：
+Cells are the primary state units in CKB, so the state transition can be represented:
 
-Inputs: 
+```
++--------+                 
+|        |                 
+| Cells  |  
+|        |             
++--------+                 
+    |
+    | transfer transaction
+    |
++--------+                 
+|        |                 
+| Cells' |  
+|        |             
++--------+  
 
-* 发送方Cell
+```
 
-Outputs:
-
-* 接收方 Cell
-* 发送方 新 Cell
-
-一个 Cell 由以下几个字段组成:
+ A cell has the following fields:
 
 ```
 Cell: {
-   capacity: uint64
+ //field name: type
+   capacity: Uint64
    lock: Script
    type: Script
-   data: `Bytes`
+   data: Bytes
    } 
 ```
 
-四个字段具体含义如下：
-
-* **capacity：**表示 Cell 的空间大小，同时也是这个 Cell 代表的原生代币的数量，
-* **lock：**是一个 Script，本质相当于是一把锁。每个 Cell 都有这种锁。
-* **type:** 是一个 Script，和 lock 一样，只是锁的用途不同，是 optional。
-* **data:** 是一个无格式字符串，可以在这里存放任何类型的数据。实现过程中，为了方便处理，我们把所有 Cell 的 data 都放到` outputs_data`
-
-如果把 Cell 看成是盒子的话，Cell 代表的原生代币的数量越多，盒子越大，盒子里装的是任何类型的数据 data，也就是说 Nervos CKB 链上的数据存放空间是要用 CKB 原生代币换的。嗯，可以说是寸土寸金吧~
+* **capacity：**Size limit of the cell, also the number of native tokens owned by the cell.
+* **lock：**If you think of Cell as a box，it's a lock of the box. Every cell has a lock script.
+* **type:** Another type of lock with different uses，it's optional.
+* **data:** State data stored in this cell, could be any format.
+  * `outputs_data`: The actual data are kept separated for the ease of CKB script handling and for the possibility of future optimizations.
 
 
-所以 outputs 可以表示成这样：
-
-* 接收方 Cell
-    * capacity: 0x56cc9c900
-    * lock 锁
-    * data: 0x
-* 发送方 新 Cell
-    * capacity: 0x5a5f6d2bccdc
-    * lock 锁
-    * data: 0x
-
-接下来我们来看  Inputs ，你会发现里面有一个字段 `"previous_output"`
-
+You will find a field called `"previous_output"` in `inputs`
 
 ```
 "inputs": [
@@ -240,20 +253,38 @@ Cell: {
   ],
 ```
 
+The field's name have been fully expressed: `inputs`is the `previous_output`. The `inputs` can be indexed through `tx_hash` and `index`.If you open [CKB-Explorer](https://explorer.nervos.org/aggron/transaction/0xb2d676c6215be0166b5b048396f581b3a0620db6ae879a3556cd8561cbec8ce1) （switch to AGGRON） ，Search for `tx_hash`, you will find the `inputs`with the similar address of the payer's address.
 
-字段名已经完全表达了含义：inputs 就是 previous output  （名字起得是不是很好~），由 tx_hash 和 index 索引到 Cell， 如果你打开 [CKB-Explorer](https://explorer.nervos.org/aggron/transaction/0xb2d676c6215be0166b5b048396f581b3a0620db6ae879a3556cd8561cbec8ce1) （记得切换网络） ，用 tx_hash 搜索，就会找到这笔交易的 `"index": "0x1"` 的 Cell, 这就是  inputs cell 
+An Example usage of CKB-Explorer
 
-[Image: image.png]
+![An Example usage of CKB-Explorer](../static/img/input-cell.png)
 
-总结一下，CKB 中的基本状态单元是 Cell, 交易的本质就是销毁一些 Cell，再生成一些新的 Cell，这些新的 Cell 也会成为另一笔交易中的需要销毁的 input cells。 The concept is similar to that of [UTXO](https://en.wikipedia.org/wiki/Unspent_transaction_output) in Bitcoin's terminology. 
+In conclusion, the essence of the transaction is to spend some cells, and then generate some new cells, which will also become input cells that need to be spent in another transaction. The unspent cells are called live cells. This concepts are similar to that of [UTXO](https://en.wikipedia.org/wiki/Unspent_transaction_output) in Bitcoin's terminology. 
 
 
-Cool! 你已经弄清楚 CKB TX 中最核心的部分，那么接下去来看剩下的部分
+the state transition can be represented:
 
+```
++--------+                 
+|        |                 
+| Cell A |  
+|        |             
++--------+                 
+    |
+    | transfer transaction
+    |
++--------+                 
+|        |                 
+| Cell B |
+| Cell C |
+|        |             
++--------+  
+
+```
 
 ### cell_deps and Witnesses
 
-先来看` cell_deps` ， 你发现了吗？`out_point`  也是`tx_hash` 和 `index`  组成的，所以 cell_deps 实际上也是用 `tx_hash` 和 `index` 指向了一个 cell，那么这个 cell 是用来干什么的呢？
+Come to `cell_deps` first, have you found out? `out_point` also made up of `tx_hash` and `index`, so    `cell_deps` is actually pointed to a cell with `tx_hash` and `index`, so what is this cell for?
 
 ```
   "cell_deps": [
@@ -267,37 +298,41 @@ Cool! 你已经弄清楚 CKB TX 中最核心的部分，那么接下去来看剩
   ],
 ```
 
-CKB 系统内建了一个很重要的智能合约叫 [SECP256K1_BLAKE160](https://github.com/nervosnetwork/ckb-system-scripts/blob/master/c/secp256k1_blake160_sighash_all.c)， 它是每个 Cell 在普通的转账交易中默认使用的 lock 锁 。 这把锁代表的就是用 SECP256K1 这种特定的加密算法，来保护每个 Cell 最基础的所属权。CKB 系统在创世块的时候创建了一些 cell, 把实际上要执行的合约代码，放在了 cell 的 data 字段里，转账时，我们把这些 Cell 作为 cell_deps 引入到交易中。
+[SECP256K1_BLAKE160](https://github.com/nervosnetwork/ckb-system-scripts/blob/master/c/secp256k1_blake160_sighash_all.c) is a piece of code using the same secp256k1 signature verification algorithm as used in bitcoin.It is the default lock script used to protect the ownership of each cell. 
 
-对比[SECP256K1_BLAKE160 的 info](https://github.com/nervosnetwork/rfcs/blob/master/rfcs/0024-ckb-system-script-list/0024-ckb-system-script-list.md#locks) 可以看到 tx_hash 和 index 是一致的，如果去 CKB-Explorer 查这个 [Cell info](https://explorer.nervos.org/aggron/transaction/0xf8de3bb47d055cdf460d93a2a6e1b05f7432f9777c8c474abf4eec1d4aee5d37) ，可以看到 data 部分是有数据的。
-[Image: image.png][Image: image.png]
+There is one cell created in the genesis block and SECP256K1_BLAKE160 code is compiled and put in the `data` field of the cell. The transfer transaction should use it as `cell_deps` to protect cells in `inputs and outputs`.
+
+The `tx_hash` and `index` are the same with [SECP256K1_BLAKE160 info](https://github.com/nervosnetwork/rfcs/blob/master/rfcs/0024-ckb-system-script-list/0024-ckb-system-script-list.md#locks).
+
+![Secp256k1-info](../static/img/secp256k1-info.png)
+
+The info of secp256k1 cell in Aggron Testnet.
 
 
-### Lock Script （lock 锁）
+### Lock Script
 
-那么具体的运作方式是什么样的呢？
+So what is the specific mode of operation?
 
-CKB 中这样的“锁”，叫做 Script， 一个 Script 由以下几个字段组成:
+The type of the lock script is `Script`， A cell has the following fields:
 
 ```
 Script: {
+// field name: type
    code_hash: H256(hash)
    args: Bytes
-   hash_type: String, could be ``type`` or ``data`  `
+   hash_type: String, could be `type` or `data`
    } 
 ```
 
-本文档中的 Cell 用到的 lock Script：
+The `hash_type` means that the interpretation of code hash when looking for matched dep cells. The default lock script should be `type`:
 
 ```
 Lock Script: {
    code_hash: H256(hash)
    args: Bytes
-   hash_type: ``type`` 
+   hash_type: type
    } 
 ```
-
-
 
 在 code_hash 填上 dep_cell 的 code hash，同时在 args 字段放入自己的公钥哈希， 发起交易时， 就用私钥对这笔交易做一个签名，Witnesses 放的就是这个签名。这样SECP256K1 加密算法输入公钥和签名，就能判断这笔交易是不是由对应的私钥发起的， 从而也就能判断背后是不是这个 Cell 真正的主人在操作，也就是保证了 Cell 的所属权。
 

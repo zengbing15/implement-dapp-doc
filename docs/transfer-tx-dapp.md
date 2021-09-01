@@ -1,7 +1,9 @@
 ---
+id: transfer-tx-dapp-demo
+title: A transfer-tx DApp demo
 sidebar_position: 4
 ---
-# A transfer-tx  DApp demo
+
 
 可能你会有顾虑，虽然已经理解了 CKB 的交易，可是这么复杂的交易必须手动拼出来吗？
 当然不是！手动拼交易只是其中的一种方式，CKB 团队提供了一个非常好用的工具 Lumos，可以帮助自动构建交易，在 Call RPC interface to get blockchain info  已经体验了 Lumos  rpc component(package)，The transfer-tx DApp demo is based on Lumos functionalities to implement the most basic functions，接下来会了解到 lumos 更多功能。
@@ -272,7 +274,7 @@ The transaction hash is: 0xbbab8ff0e8609fca7a7bbfb8112a13027058d38b740d67db191f9
 在这个过程中使用了 Lumos 的 几乎所有常用 component（packages）， see  [Lumos Components (Packages)](https://cryptape.github.io/lumos-doc/docs/introduction/lumoscomponents) , 回顾刚才的 code sample, 是不是更加理解 lumos 的功能了。
 
 
-## 思考
+:::info
 
 如果有对以太坊了解的朋友，是否发现了 CKB 与 以太坊 编程模型的不同之处呢？
 
@@ -284,3 +286,5 @@ DApps on CKB layer1 separate the generation and verification of state. The state
 
 不过这是否意味着 Ethereum dApp 开发者如果想在 CKB 上开发，就必须要抛弃之前的开发习惯，学习一套新的编程模型和工具呢？
 当然不是！原因会在 To be Continued 揭晓~
+
+:::
