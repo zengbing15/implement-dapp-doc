@@ -14,7 +14,7 @@ Lumos is a very handy development tool. CKB DApps can be developed upon lumos. [
 
 ### Set Up the Development Environment 
 
-See[Set Up the Development Environment](https://cryptape.github.io/lumos-doc/docs/preparation/setupsystem),then you will run a CKB node on Dev Chain by using [Tippy](https://github.com/nervosnetwork/tippy).
+See [Set Up the Development Environment](https://cryptape.github.io/lumos-doc/docs/preparation/setupsystem),then you will run a CKB node on Dev Chain by using [Tippy](https://github.com/nervosnetwork/tippy).
 
 An example of Tippy's dashboard 
 
@@ -22,15 +22,15 @@ An example of Tippy's dashboard
 
 ###  Connect to CKB node through RPC
 
-```
-$yarn add @ckb-lumos/rpc
+```bash
+$ yarn add @ckb-lumos/rpc
 ```
 
 Get the blockchain info
 
-```
-const { RPC } = require(`"@ckb-lumos/rpc"`);
-const rpc = `new`` RPC``("http://localhost:8114"``);`
+```javascript 
+const { RPC } = require("@ckb-lumos/rpc");
+const rpc = new RPC("http://localhost:8114");
 async function main(){
     const result = await rpc.get_blockchain_info();
     console.log(result);
@@ -40,14 +40,15 @@ main();
 
 An example of the blockchain info:
 
-```
+```json
   alerts: [],
-  chain: 'ckb_dev',
-  difficulty: '0x100',
-  epoch: '0x64005b0000bc',
+  chain: "ckb_dev",
+  difficulty: "0x100",
+  epoch: "0x64005b0000bc",
   is_initial_block_download: false,
-  median_time: '0x17b9c952a1d'
+  median_time: "0x17b9c952a1d"
 ```  
+
 The full code of the example can be found [here](https://github.com/zengbing15/simple-dapp-demo/tree/main/call-rpc).
 
 Great! Now you have got your foot in the door! 
@@ -75,12 +76,12 @@ At its core, a blockchain is a [replicated deterministic state machine](https://
 
 Nervos CKB Layer1 also follows this logic, the following is a transfer transaction on CKB Aggron Testnet, the following is the state transition triggered by the transfer transaction:
 
-The payer's address：ckt1qyqddquttee9zqlj7xlmtrd7vjunp2zh5f3spa2vjy
-The recipient's address：ckt1qyqv70xf5cusptp0gwzqj8ewsen7j2c0aa8sq5d7y6
+* The payer's address：ckt1qyqddquttee9zqlj7xlmtrd7vjunp2zh5f3spa2vjy
+* The recipient's address：ckt1qyqv70xf5cusptp0gwzqj8ewsen7j2c0aa8sq5d7y6
 
 An example of transfer transaction on CKB Aggron Testnet
 
-```
+```json
 {
   "version": "0x0",
   "cell_deps": [
@@ -135,7 +136,7 @@ The transaction JSON code looks a bit complicated, don't panic, let's look throu
 
 ### Inputs and Outputs
 
-```
+```json {10-27}
 "inputs": [
     {
       "since": "0x0",
@@ -171,37 +172,11 @@ The transaction JSON code looks a bit complicated, don't panic, let's look throu
 
 You may find that there are two objects in the `outputs` that are similar in structure (put aside the `inputs` now).
 
-```
-  "outputs": [
-    {
-      "capacity": "0x56cc9c900",
-      "lock": {
-        "code_hash": "0x9bd7e06f3ecf4be0f2fcd2188b23f1b9fcc88e5d4b65a8637b17723bbda3cce8",
-        "hash_type": "type",
-        "args": "0xcf3cc9a63900ac2f4384091f2e8667e92b0fef4f"
-      }
-    },
-    {
-      "capacity": "0x5a5f6d2bccdc",
-      "lock": {
-        "code_hash": "0x9bd7e06f3ecf4be0f2fcd2188b23f1b9fcc88e5d4b65a8637b17723bbda3cce8",
-        "hash_type": "type",
-        "args": "0xd6838b5e725103f2f1bfb58dbe64b930a857a263"
-      }
-    }
-  ],
-   "outputs_data": [
-    "0x",
-    "0x"
-  ],
-```
-
-
 You got it!  This is called `Cell` which is the best design about Nervos CKB!
 
 ### Cell 
 
-Cells are the primary state units in CKB, so the state transition can be represented:
+Cells are the primary state units in CKB, so the state transition can be represented as follows:
 
 ```
 +--------+                 
@@ -222,7 +197,7 @@ Cells are the primary state units in CKB, so the state transition can be represe
 
  A cell has the following fields:
 
-```
+```jsx
 Cell: {
  //field name: type
    capacity: Uint64
@@ -241,7 +216,7 @@ Cell: {
 
 You will find a field called `"previous_output"` in `inputs`
 
-```
+```json {5-6}
 "inputs": [
     {
       "since": "0x0",
@@ -253,7 +228,7 @@ You will find a field called `"previous_output"` in `inputs`
   ],
 ```
 
-The field's name have been fully expressed: `inputs`is the `previous_output`. The `inputs` can be indexed through `tx_hash` and `index`.If you open [CKB-Explorer](https://explorer.nervos.org/aggron/transaction/0xb2d676c6215be0166b5b048396f581b3a0620db6ae879a3556cd8561cbec8ce1) （switch to AGGRON） ，Search for `tx_hash`, you will find the `inputs`with the similar address of the payer's address.
+The field's name have been fully expressed: `inputs`is the `previous_output`. The `inputs` can be indexed through `tx_hash` and `index`.If you open [CKB-Explorer](https://explorer.nervos.org/aggron/transaction/0xb2d676c6215be0166b5b048396f581b3a0620db6ae879a3556cd8561cbec8ce1) (switch to `AGGRON`) ，Search for `tx_hash`, you will find the `inputs`with the similar address of the payer's address.
 
 An Example usage of CKB-Explorer
 
@@ -262,7 +237,7 @@ An Example usage of CKB-Explorer
 In conclusion, the essence of the transaction is to spend some cells, and then generate some new cells, which will also become input cells that need to be spent in another transaction. The unspent cells are called live cells. This concepts are similar to that of [UTXO](https://en.wikipedia.org/wiki/Unspent_transaction_output) in Bitcoin's terminology. 
 
 
-the state transition can be represented:
+the state transition can be represented as follows:
 
 ```
 +--------+                 
@@ -286,7 +261,7 @@ the state transition can be represented:
 
 Come to `cell_deps` first, have you found out? `out_point` also made up of `tx_hash` and `index`, so    `cell_deps` is actually pointed to a cell with `tx_hash` and `index`, so what is this cell for?
 
-```
+```json {4-5}
   "cell_deps": [
     {
       "out_point": {
@@ -315,7 +290,7 @@ So what is the specific mode of operation?
 
 The type of the lock script is `Script`， A cell has the following fields:
 
-```
+```jsx
 Script: {
 // field name: type
    code_hash: H256(hash)
@@ -330,17 +305,21 @@ The `hash_type` means that the interpretation of code hash when looking for matc
 Lock Script: {
    code_hash: H256(hash)
    args: Bytes
-   hash_type: type
+   hash_type: `type`
    } 
 ```
 
-在 code_hash 填上 dep_cell 的 code hash，同时在 args 字段放入自己的公钥哈希， 发起交易时， 就用私钥对这笔交易做一个签名，Witnesses 放的就是这个签名。这样SECP256K1 加密算法输入公钥和签名，就能判断这笔交易是不是由对应的私钥发起的， 从而也就能判断背后是不是这个 Cell 真正的主人在操作，也就是保证了 Cell 的所属权。
+Fill in `code_hash` with `dep_cell`'s code hash, also fill in `args` with the payer's public key hash. When the payer commits a transaction, TA should sign the transaction with private key, which is what `Witnesses` puts it on.
 
-对比 [SECP256K1_BLAKE160 的 info](https://github.com/nervosnetwork/rfcs/blob/master/rfcs/0024-ckb-system-script-list/0024-ckb-system-script-list.md#locks)  的 code_hash 与 output cells 中的 code_hash 是 一致的。
+In this way,the SECP256K1 encryption algorithm with the public key and signature can figure out whether the transaction was committed by the corresponding private key, and also figure out whether the real owner is operating behind it.
 
-[Image: image.png]
+The `code_hash` in the lock script are the same with `code_hash` in [SECP256K1_BLAKE160 info](https://github.com/nervosnetwork/rfcs/blob/master/rfcs/0024-ckb-system-script-list/0024-ckb-system-script-list.md#locks).
 
-```
+![Secp256k1-info](../static/img/secp256k1-info.png)
+
+The info of secp256k1 cell in Aggron Testnet.
+
+```json {15,23}
   "cell_deps": [
     {
       "out_point": {
@@ -378,27 +357,28 @@ Lock Script: {
   ]
 }
 ```
-
-
-
 ### Address and Lock Script
 
-最后还需要你理解一个东西，就是转账交易双方的 Address：
+The last thing you need to understand is `Address` on CKB network.
 
-* 发送方地址：ckt1qyqddquttee9zqlj7xlmtrd7vjunp2zh5f3spa2vjy
-* 接收方地址：ckt1qyqv70xf5cusptp0gwzqj8ewsen7j2c0aa8sq5d7y6
+On CKB network,an accont is a set of live cells with similar lock script. An address is packaged the lock script into a single line with verificable and human readable format. 
+The prefix of "ckt" is means that the address is created on CKB testnet, see [RFC: CKB Address Format](https://github.com/nervosnetwork/rfcs/blob/master/rfcs/0021-ckb-address-format/0021-ckb-address-format.md#ckb-address-format)
 
+Therefore, an address is represented as an account. 
+The relationship between private key, public key（args）, lock script, and CKB address is represented as follows：
 
-在 CKB 中，Account 就是一堆 live cell 的集合，具有同样的 lock，地址 packages a lock script into a single line in a verifiable and human-readable format. 所以 address 就代表了 account ，此外地址还遵循一定的 format，"ckt" is for the testnet or devchain, see [RFC: CKB Address Format](https://github.com/nervosnetwork/rfcs/blob/master/rfcs/0021-ckb-address-format/0021-ckb-address-format.md#ckb-address-format)
+```markdown
++-------------+                 
+| private key | -----$\rightarrow$                 
++-------------+
+```
 
-private key, public key（args）, lock script, and CKB address 之间的关系是这样的：
 [Image: image.png]
 
 
 ### Create CKB accounts 
 
-[CKB-CLI](https://github.com/nervosnetwork/ckb-cli) 可以用来生成 account 需要的所有信息， see [Create the Accounts by Using ckb-cli](https://cryptape.github.io/lumos-doc/docs/reference/ckbaccount#create-the-accounts-by-using-ckb-cli)
-
+You can use [CKB-CLI](https://github.com/nervosnetwork/ckb-cli) to generate accounts
 
 * Prerequisites：[Run a CKB Node on DEV Chain by Using Tippy](https://cryptape.github.io/lumos-doc/docs/preparation/setupsystem)
 * Step 1. [Download the CKB pre-built installer package](https://cryptape.github.io/lumos-doc/docs/reference/ckbaccount#step-1-download-the-ckb-pre-built-installer-package).
@@ -408,9 +388,9 @@ private key, public key（args）, lock script, and CKB address 之间的关系�
 * Step 5. [Get CKB capacity for the account](https://cryptape.github.io/lumos-doc/docs/reference/ckbaccount#step-5-get-ckb-capacity-for-the-account-of-alice)
 
 
-这是：ckt1qyqddquttee9zqlj7xlmtrd7vjunp2zh5f3spa2vjy 的 info
+This is the payer's account info：
 
-```
+```json {4}
 address:
   mainnet: ckb1qyqddquttee9zqlj7xlmtrd7vjunp2zh5f3suc5n7c
   testnet: ckt1qyqddquttee9zqlj7xlmtrd7vjunp2zh5f3spa2vjy
@@ -419,9 +399,9 @@ lock_hash: 0x10f9a227094e77ee9149b3e8ed1e34f6d5c7c604bab81e0df42f13e1d33ac0fb
 ```
 
 
-这是：ckt1qyqv70xf5cusptp0gwzqj8ewsen7j2c0aa8sq5d7y6 的info
+This is the recipient's account info：
 
-```
+```json {4}
 address:
     mainnet: ckb1qyqv70xf5cusptp0gwzqj8ewsen7j2c0aa8sa3npgx
     testnet: ckt1qyqv70xf5cusptp0gwzqj8ewsen7j2c0aa8sq5d7y6
@@ -429,10 +409,9 @@ address:
   lock_hash: 0xc7cea924f48d069396b6826ee17653580d90d505544fa6940dbba3d24d9258ba
 ```
 
+The `lock_arg` in the address is similar with the `args` in the `outputs`.
 
-对比 这两个地址的 lock_arg 和 output cells 的 args 是一致的。
-
-```
+```json {7,15}
   "outputs": [
     {
       "capacity": "0x56cc9c900",
@@ -463,56 +442,53 @@ address:
 
 ### Witnesses
 
-* contained signature which is generated by 发送方 private_key
+In the transfer transaction case, the `Witnesses` is just contained signature which is generated by the payer's private key.
 
-```
-// witness = {lock is 0, input_type is null, output_type is null}
-```
+:::tip
+if `lock script` is 0   
 
-```
+```json
 Witnesses = List(["0x55000000100000005500000055000000410000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000"]);
 ```
+:::
 
 
+### Summary
 
-### 总结，这笔 转账交易可以表示成这样：
+The transfer transaction can be represented as follows:
 
-Cell_deps:
+```json
+cell_deps:
+  * point to the cell with SECP256K1 code
 
-* point to the cell with SECP256K1 code
+inputs: 
+  * The payer's cell：point to previous_output
 
-Inputs: 
-
-* 发送方Cell：point to previous_output
-
-Outputs:
-
-* 接收方 Cell
+outputs:
+  * the recipient's cell
     * capacity: 0x56cc9c900
     * lock script
         * SECP256K1 code hash
-        * 接收方 public_key hash
+        * the recipient's public_key hash
     * data: 0x
-* 发送方 新 Cell
+  * the payer's cell
     * capacity: 0x5a5f6d2bccdc
     * lock script
         * SECP256K1 code hash
-        * 发送方 public_key hash
+        * the payer's public_key hash
     * data: 0x
-
-最终用 私钥对这笔交易进行签名并发送上链。
-
-### How to sign the transfer transaction
-
-
-We need the following arguments to sign a tx， see [How to sign transaction](https://github.com/nervosnetwork/ckb-system-scripts/wiki/How-to-sign-transaction)
-
-
-```
-`* pk, secp256k1 private key
-* witnesses, contains signatures of the tx.`
+ witnesses:
+    * contain the payer's signature
+  
 ```
 
-this is the default signing solution used in CKB now.
+### (optional)How to sign the transfer transaction
 
-剩下的字段 `version` ， `header_deps`，`since` 跟本文档内容关系不大，[see RFC: Data Structures of Nervos CKB](https://github.com/nervosnetwork/rfcs/blob/master/rfcs/0019-data-structures/0019-data-structures.md)
+We need the following arguments to sign a tx，this is the default signing solution used in CKB now. For more information,see [How to sign transaction](https://github.com/nervosnetwork/ckb-system-scripts/wiki/How-to-sign-transaction)
+
+```
+* pk, secp256k1 private key
+* witnesses, contains signatures of the tx.
+```
+
+For more information about `version` ， `header_deps`，`since`, see [RFC: Data Structures of Nervos CKB](https://github.com/nervosnetwork/rfcs/blob/master/rfcs/0019-data-structures/0019-data-structures.md)

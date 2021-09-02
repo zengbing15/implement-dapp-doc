@@ -19,14 +19,10 @@ APP
 * Back-end: write programs that respond to requests.
 * Web server, such as nginx/apache
 
-[Image: image.png]
-
 DApp
 * Client 
 * Send requests through RPC
 * Back-end: send transactions that respond to requests.
 * CKB network 
 
-[Image: image.png]
-
-The client side of web app and DApps are almost the same, you should focus on the implementation of back-end and RPC, so let's look at RPC and transaction first.
+The client side of web app and DApps are almost the same, you should focus on the implementation of back-end and RPC, so let's look through RPC and transaction first.

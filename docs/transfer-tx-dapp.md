@@ -4,15 +4,23 @@ title: A transfer-tx DApp demo
 sidebar_position: 4
 ---
 
+You've understood the important data strucure: Cell, Script and Transaction, so you can start to develop some simple DApp demos now.
 
-可能你会有顾虑，虽然已经理解了 CKB 的交易，可是这么复杂的交易必须手动拼出来吗？
-当然不是！手动拼交易只是其中的一种方式，CKB 团队提供了一个非常好用的工具 Lumos，可以帮助自动构建交易，在 Call RPC interface to get blockchain info  已经体验了 Lumos  rpc component(package)，The transfer-tx DApp demo is based on Lumos functionalities to implement the most basic functions，接下来会了解到 lumos 更多功能。
+But can such a complex transaction code be built manually?
+Of course not.
+[Lumos](https://github.com/nervosnetwork/lumos) is an open-source framework that was developed by the developers team from [Cryptape](https://www.cryptape.com/join), for building DApps on CKB.You can use lumos to build transactions on your own.
+
+You've already experienced the RPC component of lumos on [RPC](rpc-and-transaction#RPC).
+The transfer-tx DApp demo is based on Lumos functionalities to implement the most basic functions, you can understand more functions and utilities about lumos.
+
+## Project structure
+
 
 
 ## Prerequisites
 
-* 请参考 [Set Up the Development Environment](https://cryptape.github.io/lumos-doc/docs/preparation/setupsystem)  根据你的 Operating System 配置开发环境。
-* Prepare two CKB accounts, Alice and Bob, that will be used in the accounts.js file in the later transfer-tx DApp demo example, see [Create Accounts](https://cryptape.github.io/lumos-doc/docs/preparation/createaccount). 
+* See [Set Up the Development Environment](https://cryptape.github.io/lumos-doc/docs/preparation/setupsystem).
+* Prepare two CKB accounts, Alice and Bob, that will be used in the `accounts.js` file in the later transfer-tx DApp demo example, see [Create Accounts](https://cryptape.github.io/lumos-doc/docs/preparation/createaccount). 
 *  设置 Alice 作为 DevChain 的 miner to get capacity, see [Step 5. Get CKB capacity for the account of Alice](https://cryptape.github.io/lumos-doc/docs/reference/ckbaccount#step-5-get-ckb-capacity-for-the-account-of-alice) ,同时 Alice 也是转账交易的发送方，Bob 作为接收方
 * 更新 accounts.js 
 

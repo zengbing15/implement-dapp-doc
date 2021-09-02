@@ -3,7 +3,7 @@ const darkCodeTheme = require('prism-react-renderer/themes/dracula');
 
 /** @type {import('@docusaurus/types').DocusaurusConfig} */
 module.exports = {
-  title: 'My Site',
+  title: 'Develop your first DApp',
   tagline: 'Dinosaurs are cool',
   url: 'https://zengbing15.github.io',
   baseUrl: '/implement-dapp-docs/',
@@ -14,7 +14,7 @@ module.exports = {
   projectName: 'implement-dapp-docs', // Usually your repo name.
   themeConfig: {
     navbar: {
-      title: 'Implement your first DApp',
+      title: 'Develop your first DApp',
       /*
       logo: {
         alt: 'My Site Logo',
