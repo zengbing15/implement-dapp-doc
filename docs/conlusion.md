@@ -75,7 +75,7 @@ The transfer-tx DApp demo is based on Lumos functionalities to implement the mos
 
 
 
-## To be Continued
+## Stay tuned
 
 ### Mercury
 

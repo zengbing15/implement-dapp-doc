@@ -1,34 +1,57 @@
 ---
+id: felix-bot
+title: Felix bot DApp demo
 sidebar_position: 5
 ---
-# A  DApp demo:  Felix bot
 
-Wow , 你已经理解了CKB 相关的重要概念以及如何使用 lumos 开发 DApp，是时候来开发一个稍微复杂一些的 DApp demo 了~
+Now you have learned the basic knowledge of DApps development on CKB layer1 with lumos. It's time to develop a slightly more complex DApp demo.    
 
-Felix bot 基于 [botgram](https://github.com/botgram/botgram) 开发的，可以给 telegram group member 发送 CKB 红包。实际上这个 DApp demo 也需要实现转账交易，只不过除了转账交易还会有其他与 CKB 交互的需求。为了更加直观理解 DApp 客户端，后端，与CKB layer1 之间的交互，你可以一边运行 felix bot 一边来看相关代码。
+Felix bot is a telegram bot, created by [botgram](https://github.com/botgram/botgram). You can use felix bot to interact with CKB layer1, send CKBytes red packages in a telegram chat group.In the process of the felix bot DApp development,you can more intuitively understand the interaction between the client, back-end and CKB layer1.
+
+## Project Structure
+
+The full code of the example can be found [here](https://github.com/zengbing15/felix). Clone the project you will see the following files:
+
+```bash
+$ git clone https://github.com/zengbing15/felix.git
+$ cd felix
+```
+
+```
+fix
+├── lib
+│   ├── data.js
+│   ├── server.js
+│   └── utils.js
+├── schema
+│   ├── UnsignedTransaction.mol
+│   ├── UnsignedTransaction.json
+│   ├── UnsignedTransaction.js
+│   └── UnsignedTransaction.umd.js
+├── package.json
+├── .gitignore
+└── README.md
+```
 
 ## Prerequisites
 
 ### Set up the Development Environment
 
-请参考 [Set Up the Development Environment](https://cryptape.github.io/lumos-doc/docs/preparation/setupsystem)  根据你的 Operating System 配置开发环境。
+See [Set Up the Development Environment](https://cryptape.github.io/lumos-doc/docs/preparation/setupsystem).
 
 ### Prepare three CKB accounts
 
- Create three accounts: Alice and Bob and Charlie，see [Create Accounts](https://cryptape.github.io/lumos-doc/docs/preparation/createaccount). 
+ Create three accounts: Alice, Bob and Charlie，see [Create CKB accounts](rpc-and-transaction#create-ckb-accounts). The payer is Bob and the recipient is Alice.
 
-### 设置 Alice 作为 DevChain 的 miner to get capacity
+### Specify Alice as the miner
 
 see [Step 5. Get CKB capacity for the account of Alice](https://cryptape.github.io/lumos-doc/docs/reference/ckbaccount#step-5-get-ckb-capacity-for-the-account-of-alice)
 
-### Use CKB-CLI  to transfer some CKB tokens to Bob
+### Use CKB-CLI  to transfer some CKBytes to Bob
 
+```bash
+$ ckb-cli --from-account <alice lock_arg> --to-address <bob address> --capacity <transfer amount> --tx-fee <0.01(defualt value)>
 ```
-$ ckb-cli --from-account <ALICE's lock_arg> --to-address <Bob's address> --capacity <capacity> --tx-fee <tx-fee || 0.01>
-```
-
-Bob 作为转账交易的发送方，Charlie 则是接收方
-
 ### Set up a telegram bot
 
 * Create a telegram bot, see [3. How do I create a bot?](https://core.telegram.org/bots#3-how-do-i-create-a-bot)
@@ -48,29 +71,27 @@ send - send envelopes
 
 ### Install dependencies
 
-```
-$ https://github.com/zengbing15/felix.git
-$ cd felix 
+```bash
 $ npm install
 ```
 
 ### Set up the proxy server
 
-```
+```bash
 export https_proxy=http://127.0.0.1:10080;export http_proxy=http://127.0.0.1:10080;export all_proxy=socks5://127.0.0.1:10081
 ```
 
 ### Set up the BOT_TOKEN
 
-```
-$ export BOT_TOKEN=`<BOT_TOKEN>`
+```bash
+$ export BOT_TOKEN=<BOT_TOKEN>
 ```
 
 ## Set up the Configuration for Lumos
 
-因为发红包的行为实际上就是个转账交易，要用到 lumos, 所以先配置好 Lumos Config Manager and Lumos Indexer
+The act of sending a red packet is actually transferring CKBytes, so you can set up the configure manager and indexer of lumos first.
 
-```
+```javascript
 const { Indexer } = require("@ckb-lumos/indexer");
 const { initializeConfig, getConfig } = require("@ckb-lumos/config-manager");
 process.env.LUMOS_CONFIG_FILE = process.env.LUMOS_CONFIG_FILE || './config.json'
@@ -86,8 +107,6 @@ const CKB_INDEXER_DATA = process.env.CKB_INDEXER_DATA || "./indexer-data";
 const indexer = new Indexer(CKB_RPC_URI, CKB_INDEXER_DATA);
 indexer.startForever();
 ```
-
-
 For a sender, you can 
 
 * /send@botname  send 发红包命令, 能够 Grab 的次数，也就是所显示的 remaining：number 不超过 group chat member

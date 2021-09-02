@@ -1,7 +1,8 @@
 ---
+id: molecule
+title: Use Molecule Serialization System 
 sidebar_position: 6
----
-# Felix bot: Confirm signing message  
+--- 
 
 Felix bot reply the transaction hash and a json file named `UnsignedTx.json`
 so, what is the `UnsignedTx.json` file used for?
