@@ -12,7 +12,7 @@ If you open `UnsignedTx.json` file, you will find a piece of data with `0x` pref
 You can use a tool called [generate-message-tool](https://github.com/zengbing15/generate-message-tool) to deserialize the data,then generate message enventually. If this message is similar with the signing message replyed by felix bot, see [Sign the transaction offline](felix-bot#sign-the-transaction-offline)
 , then it's proved that there is no problem with the offline signing process.
 
->[Serialization and deserialization]((https://en.wikipedia.org/wiki/Serialization)) are very common functions that used for network transfer and data storage.
+>[Serialization and deserialization](https://en.wikipedia.org/wiki/Serialization) are very common functions that used for network transfer and data storage.
 
 You should use **Molecule** to implement the serialization and deserialization process.    Molecule, as a widely used data structure in CKB, has its unique property that memory consumption could be minimized, see [RFC:Serialization](https://github.com/nervosnetwork/rfcs/blob/master/rfcs/0008-serialization/0008-serialization.md).
 
