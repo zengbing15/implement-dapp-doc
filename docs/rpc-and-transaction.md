@@ -385,7 +385,7 @@ The info of secp256k1 cell in Aggron Testnet.
 The last thing you need to understand is `Address` on CKB network.
 
 On CKB network,an accont is a set of live cells with similar lock script. An address is packaged the lock script into a single line with verificable and human readable format. 
-The prefix of "ckt" is means that the address is created on CKB testnet, see [RFC: CKB Address Format](https://github.com/nervosnetwork/rfcs/blob/master/rfcs/0021-ckb-address-format/0021-ckb-address-format.md#ckb-address-format)
+The prefix of "ckt" is means that the address is generated on CKB testnet, see [RFC: CKB Address Format](https://github.com/nervosnetwork/rfcs/blob/master/rfcs/0021-ckb-address-format/0021-ckb-address-format.md#ckb-address-format)
 
 Therefore, an address is represented as an account. 
 The relationship between private key, public key（args）, lock script, and CKB address is represented as follows：

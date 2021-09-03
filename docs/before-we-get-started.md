@@ -17,4 +17,4 @@ No matter how good a theory is, if you don't practice it, you will never know wh
 
 In addition, I will not provide full content about Felix Bot's design ideas and CKB programming model first, but takes you through the CKB world starting with a few lines of calling RPC code. Because I am a novice myself, from my personal experience, it is easy for a novice to get confused when receiving too much information at one time, which means there is no focus. However, if you want to look through the whole thing, you can directly see [Conclusion](conclusion). 
 
-In short, I hope this document can serve as a primer. If you run into any issues, please feel free to email me at [zengb@cryptape.com](mailto:zengb@cryptape.com). I truly appreciate your feedback (*^▽^*).
+In short, this doc site is intended to serve as the starting point for development on CKB network. If you run into any issues, please feel free to email me at [zengb@cryptape.com](mailto:zengb@cryptape.com). I truly appreciate your feedback (*^▽^*).

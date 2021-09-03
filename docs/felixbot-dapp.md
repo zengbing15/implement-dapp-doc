@@ -6,11 +6,11 @@ sidebar_position: 5
 
 Now you have learned the basic knowledge of DApps development on CKB layer1 with lumos. It's time to develop a slightly more complex DApp demo.    
 
-Felix bot is a telegram bot, created by [botgram](https://github.com/botgram/botgram). You can use felix bot to interact with CKB layer1, send CKBytes red packages in a telegram chat group.In the process of the felix bot DApp development,you can more intuitively understand the interaction between the client, back-end and CKB layer1.
+Felix bot is a telegram bot, created by [botgram](https://github.com/botgram/botgram). You can use felix bot to interact with CKB layer1, send CKBytes red envelopes in a telegram chat group.In the process of the felix bot DApp development,you can more intuitively understand the interaction between the client, back-end and CKB layer1.
 
 ## Project Structure
 
-The full code of the example can be found [here](https://github.com/zengbing15/felix). Clone the project you will see the following files:
+The full code of felix bot dapp demo can be found [here](https://github.com/zengbing15/felix). Clone and open the project you will see the following files:
 
 ```bash
 $ git clone https://github.com/zengbing15/felix.git
@@ -18,7 +18,7 @@ $ cd felix
 ```
 
 ```
-fix
+felix
 ├── lib
 │   ├── data.js
 │   ├── server.js
@@ -91,7 +91,7 @@ $ export BOT_TOKEN=<BOT_TOKEN>
 
 The act of sending a red packet is actually transferring CKBytes, so you can set up the configure manager and indexer of lumos first.
 
-```javascript
+```javascript title="/felix/lib/server.js"
 const { Indexer } = require("@ckb-lumos/indexer");
 const { initializeConfig, getConfig } = require("@ckb-lumos/config-manager");
 process.env.LUMOS_CONFIG_FILE = process.env.LUMOS_CONFIG_FILE || './config.json'
@@ -109,28 +109,25 @@ indexer.startForever();
 ```
 For a sender, you can 
 
-* /send@botname  send 发红包命令, 能够 Grab 的次数，也就是所显示的 remaining：number 不超过 group chat member
+* Send a red envelope, The number of `remaining` can't be exceeding the group members' number.
 
-[Image: image.png]
+![send envelopes](../static/img/send-envelope.png)
+
 For a grabber, you can
 
-* set your receiving address: Charlie’s address
-* Grab the red package 
+* Set your receiving address: Charlie’s address
+* Grab the red envelope
 
-[Image: image.png]
-
-
-## Use [parseAddress](https://nervosnetwork.github.io/lumos/modules/helpers.html#parseaddress) to confirm receiving address  
-
-在 Address and Lock Script 部分，提到 
-
-> 地址 packages a lock script into a single line in a verifiable and human-readable format.，"ckt" is for the testnet or devchain. 
+![set address](../static/img/set-address.png)
 
 
-所以使用 `parseAddress`  对输入的地址进行解析，判断是否 return `Script`  type, 如果没有，则进行提示，`CKB_CONFIG.PREFIX`表示了 the  address prefix `PREFIX` of  current running chain `CKB_CONFIG` object 
+## Use [parseAddress](https://nervosnetwork.github.io/lumos/modules/helpers.html#parseaddress) to confirm the receiving address  
+> The prefix of "ckt" is means that the address is created on CKB testnet, see [Address and Lock Script](rpc-and-transaction#address-and-lock-script)
+
+Use [parseAddress](https://nervosnetwork.github.io/lumos/modules/helpers.html#parseaddress) in `@ckb-lumos/helpers`to confirm the address.`CKB_CONFIG.PREFIX` means that the address prefix that should be entered. 
 
 
-```
+```javascript {6} title="/felix/lib/server.js"
 const {parseAddress} = require("@ckb-lumos/helpers");
 
   [DATA_RECEIVING_ADDRESS]: async (session, msg, reply) => {
@@ -149,10 +146,9 @@ const {parseAddress} = require("@ckb-lumos/helpers");
     return null;
   },
 ```
+When the grabber grabs the red envelope,felix bot can get the grabber's `user.id` and `address`.
 
-Felix 通过 grabber 的 `Grab `行为获得 grabber 的 user.id 和 address
-
-```
+```javascript title="/felix/lib/data.js"
   async grab(receiverId, storage) {
     if (this.remaining() <= 0) {
       throw new Error("You are too late!");
@@ -172,30 +168,25 @@ Felix 通过 grabber 的 `Grab `行为获得 grabber 的 user.id 和 address
     });
   }
 ```
-
-
 For a sender , you can 
 
-* select a envelope to pay
-* enter the CKBytes to pay for the red envelope
-* enter the address used to pay for the red envelope: Bob’s address
+* Select a envelope to pay
+* Enter the CKBytes to pay for the red envelope
+* Enter the address used to pay for the red envelope: Bob’s address
 
-[Image: image.png]
+![pay envelopes](../static/img/pay-envelope.png)
 
 ## Build the transaction skeleton
 
-
-这时候已经获取到了转账所需的足够的信息（交易双方地址，转账金额），并且查找到需要转账给 Grab 红包的人的 `currentAmount` ,然后就按步骤 build txSkeleton：
-
+Now enough information is obtained for the transfer transaction:the address of two transaction parties,both parties to the transaction, transfer amount.You can build the transaction skeleton:
 
 * Create a transaction skeleton
 * Add the transaction fee
 * Prepare the signing entries 
 
-```
+```javascript title="/felix/lib/server.js"
 let txSkeleton = TransactionSkeleton({ cellProvider: indexer });
     const fromInfos = [fromAddress]
-
 ......
 
       txSkeleton = await common.transfer(
@@ -205,25 +196,22 @@ let txSkeleton = TransactionSkeleton({ cellProvider: indexer });
         currentAmount + BigInt(61) * SHANNONS,
       );
     }
-    
-       // use `payFeeByFeeRate` to set dynamic tx fee
+    //use `payFeeByFeeRate` to set dynamic tx fee
     txSkeleton = await common.payFeeByFeeRate(
       txSkeleton, 
       fromInfos, 
       FEE_RATE,
       );
     txSkeleton = common.prepareSigningEntries(txSkeleton);
-   
 ```
 
+## Sign the transaction offline
 
+Felix bot will reply signing message.
 
-之后 felix bot reply `message` in signingEntries object 
+![message](../static/img/message.png)
 
-[Image: image.png]
-
-
-```
+```javascript title="/felix/lib/server.js"
     ......
     const signingInfos = txSkeleton
       .get("signingEntries")
@@ -241,36 +229,29 @@ let txSkeleton = TransactionSkeleton({ cellProvider: indexer });
   },
 ```
 
-
-
-## Sign the transaction offline
-
-为了保证安全，Transaction assembling and transaction signing should be separated. It’s recommended to use ckb-cli to sign the transaction  to generate the signature. 
+For security,transaction assembling and transaction signing should be separated. It’s recommended to use [CKB-CLI](https://github.com/nervosnetwork/ckb-cli) to sign the transaction  to generate the signature. 
 
 For a grabber, you can
 
-* Use ckb-cli to sign the transaction
+* Sign the transaction
 
 ### Use ckb-cli to sign the transaction
 
 * The CKB pre-built installer package includes the ckb-cli tool, see [Download the CKB pre-built installer package](https://cryptape.github.io/lumos-doc/docs/reference/ckbnode/#step-1-download-the-ckb-pre-built-installer-package). 
 * generate the signature 
 
-```
-$ ckb-cli util sign-message --recoverable --from-account <bob's lock_arg> --message <signing message>
+```bash
+$ ckb-cli util sign-message --recoverable --from-account <bob lock_arg> --message <signing message>
 ```
 
 The following is a signature output example：
 
-```
+```json
 Password: 
 path: m
 recoverable: true
 signature: 0xd75d630994f862b43c52dc5dfd22306b9fec4112e751a5daf40fef7da0db05d7506a3494b63d7546dbdd2ea93af61f939d162fe7b8fe45da3ef929493a22762600
 ```
-
-
-
 
 ## Seal the transaction with the generated signature
 
@@ -278,7 +259,7 @@ For a grabber, you can
 
 * Commit the generated signature to felix bot.
 
-```
+```javascript title="/felix/lib/server.js"
  [DATA_PAY_SIGNING]: async (session, msg, reply) => {
     const envelope = session[DATA_PAY];
     const amount = session[DATA_PAY_AMOUNT];
@@ -295,15 +276,12 @@ For a grabber, you can
       console.log(`Error sealing transaction: ${e} stack: ${e.stack}`);
       reply.text("Invalid signatures!");
       return DATA_PAY_SIGNING;
-    }  
-    
+    }   
 ```
 
 ## Send the finalized transaction to the CKB network
 
-
-
-```
+```javascript title="/felix/lib/server.js"
     const txHash = await rpc.send_transaction(tx);
 
     reply.text(`Envelope successfully paid! TX hash: ${txHash}`);
@@ -312,7 +290,8 @@ For a grabber, you can
     delete session[DATA_PAY_ADDRESS];
 ```
 
+Felix bot will reply the transaction hash and `UnsignedTx.json` file.
 
-[Image: image.png]
+![tx_hash](../static/img/tx_hash.png)
 
 
