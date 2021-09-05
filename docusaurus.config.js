@@ -9,18 +9,17 @@ module.exports = {
   baseUrl: '/implement-dapp-docs/',
   onBrokenLinks: 'throw',
   onBrokenMarkdownLinks: 'warn',
-  favicon: 'img/favicon.ico',
+  favicon: 'img/favicon.png',
   organizationName: 'zengbing15', // Usually your GitHub org/user name.
   projectName: 'implement-dapp-docs', // Usually your repo name.
+  plugins: ['docusaurus-plugin-sass'],
   themeConfig: {
     navbar: {
       title: 'Develop your first DApp',
-      /*
       logo: {
         alt: 'My Site Logo',
-        src: 'img/logo.svg',
+        src: 'img/favicon.png',
       },
-      */
       items: [
         /*
         {
@@ -34,7 +33,7 @@ module.exports = {
         /* {to: '/blog', label: 'Blog', position: 'left'},*/
         {
           href: 'https://github.com/zengbing15/implement-dapp-docs',
-          label: 'Docs GitHub',
+          label: 'GitHub',
           position: 'right',
         },
       ],

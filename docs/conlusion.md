@@ -6,7 +6,7 @@ sidebar_position: 7
 
 ## Develop your first DApp on CKB layer1
 
-### About Nervos CKB
+### Related Concepts 
 * Data Structures of Nervos CKB: Cell, Script, Transaction, see [A transfer transaction on CKB Testnet](rpc-and-transaction#a-transfer-transaction-on-ckb-testnet)
 * State Generation and Verification,see [Generation offline Validation online](transfer-tx-dapp-demo#generation-offline-validation-online).
 * There is a important principle for development on CKB layer1,see [Submit the minimal data](molecule#submit-the-minimal-data).
