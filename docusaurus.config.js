@@ -4,7 +4,7 @@ const darkCodeTheme = require('prism-react-renderer/themes/dracula');
 /** @type {import('@docusaurus/types').DocusaurusConfig} */
 module.exports = {
   title: 'Develop your first DApp',
-  tagline: 'Dinosaurs are cool',
+  tagline: 'Develop your first DApp on CKB layer1',
   url: 'https://zengbing15.github.io',
   baseUrl: '/implement-dapp-docs/',
   onBrokenLinks: 'throw',
@@ -32,8 +32,8 @@ module.exports = {
        
         /* {to: '/blog', label: 'Blog', position: 'left'},*/
         {
-          href: 'https://github.com/zengbing15/implement-dapp-docs',
           label: 'GitHub',
+          href: 'https://github.com/zengbing15/implement-dapp-docs',
           position: 'right',
         },
       ],

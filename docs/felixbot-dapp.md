@@ -1,6 +1,6 @@
 ---
 id: felix-bot
-title: Felix bot DApp demo
+title: Felix Bot DApp demo
 sidebar_position: 5
 ---
 
