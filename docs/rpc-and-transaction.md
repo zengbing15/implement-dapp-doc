@@ -388,16 +388,7 @@ On CKB network,an accont is a set of live cells with similar lock script. An add
 The prefix of "ckt" is means that the address is generated on CKB testnet, see [RFC: CKB Address Format](https://github.com/nervosnetwork/rfcs/blob/master/rfcs/0021-ckb-address-format/0021-ckb-address-format.md#ckb-address-format)
 
 Therefore, an address is represented as an account. 
-The relationship between private key, public key（args）, lock script, and CKB address is represented as follows：
-
-```markdown
-+-------------+                 
-| private key | -----$\rightarrow$                 
-+-------------+
-```
-
-[Image: image.png]
-
+The relationship between private key, public key（args）, lock script, and CKB address is represented [here](https://cryptape.github.io/lumos-doc/docs/reference/ckbaccount#ownership-of-ckb-capacity).
 
 ### Create CKB accounts 
 

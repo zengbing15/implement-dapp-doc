@@ -8,6 +8,8 @@ Now you have learned the basic knowledge of DApps development on CKB layer1 with
 
 Felix bot is a telegram bot, created by [botgram](https://github.com/botgram/botgram). You can use felix bot to interact with CKB layer1, send CKBytes red envelopes in a telegram chat group.In the process of the felix bot DApp development,you can more intuitively understand the interaction between the client, back-end and CKB layer1.
 
+![felixbot](../static/img/felixbot.svg)
+
 ## Project Structure
 
 The full code of felix bot dapp demo can be found [here](https://github.com/zengbing15/felix). Clone and open the project you will see the following files:

@@ -18,6 +18,8 @@ You should use **Molecule** to implement the serialization and deserialization p
 
 In this section, you will learn about the molecule format and the implementations of serialization and deserialization by molecule.
 
+![molecule](../static/img/molecule.svg)
+
 ## Use the molecule serialization implementation
 
 ### Create a schema file 
@@ -140,7 +142,7 @@ which displayed how to use the molecule deserialization implementation. Use the 
 
 ### Project Structure
 
-Clone and open the project you will see the following files:
+Clone and open the project, put the `UnsignedTx.json` in it, you will see the following files:
 
 ```bash
 $ git clone https://github.com/zengbing15/generate-message-tool.git
@@ -157,6 +159,7 @@ generate-message-tool
 │   ├── UnsignedTransaction.js
 │   └── UnsignedTransaction.umd.js
 ├── package.json
+├── UnsignedTx.json
 ├── .gitignore
 └── README.md
 ```
