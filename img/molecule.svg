@@ -1,0 +1,76 @@
+<svg xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 720 569" width="720" xmlns="http://www.w3.org/2000/svg" height="569">
+    <style type="text/css"><![CDATA[
+.st2 {fill:#133a77;font-family:微软雅黑;font-size:13.5pt}
+.st1 {fill:#ffffff;font-family:微软雅黑;font-size:13.5pt}
+]]></style>
+    <defs/>
+    <g transform="translate(1,1)">
+        <path fill="none" id="shape1" d="M718,303L718,0L0,0L0,303L718,303z" transform="translate(0,91.35)" stroke-dasharray="6,4" stroke="#323232"/>
+        <g transform="translate(16.5,144.35)">
+            <g id="shape2" transform="translate(0,-0)">
+                <path fill="#cacaca" d="M201,76.1C207.6,76.1,213,70.8,213,64.1L213,12C213,5.4,207.6,0,201,0L12,0C5.4,0,0,5.4,0,12L0,64.1C0,70.8,5.4,76.1,12,76.1L201,76.1z" fill-rule="evenodd"/>
+                <text class="st1" xml:space="preserve">
+                    <tspan y="46.1" x="11">JavaScript Plain object</tspan>
+                </text>
+            </g>
+            <g id="shape3" transform="translate(416,-0)">
+                <path fill="#cacaca" d="M201,76.1C207.6,76.1,213,70.8,213,64.1L213,12C213,5.4,207.6,0,201,0L12,0C5.4,0,0,5.4,0,12L0,64.1C0,70.8,5.4,76.1,12,76.1L201,76.1z" fill-rule="evenodd"/>
+                <text class="st1" xml:space="preserve">
+                    <tspan y="35.1" x="26.6">Another JavaScript </tspan>
+                    <tspan y="57.1" x="79.6">object</tspan>
+                </text>
+            </g>
+            <g id="shape4" transform="translate(416,159.85)">
+                <path fill="#133a77" d="M201,76.1C207.6,76.1,213,70.8,213,64.1L213,12C213,5.4,207.6,0,201,0L12,0C5.4,0,0,5.4,0,12L0,64.1C0,70.8,5.4,76.1,12,76.1L201,76.1z" fill-rule="evenodd"/>
+                <text class="st1" xml:space="preserve">
+                    <tspan y="35.1" x="12.5">Serialized ArrayBuffer </tspan>
+                    <tspan y="57.1" x="87.5">data</tspan>
+                </text>
+            </g>
+            <g id="shape5" transform="translate(213,38.07)">
+                <path fill="none" d="M0,0L198.6,-0" stroke="#323232"/>
+                <path fill="#323232" stroke-width="1" d="M203,-0L197.8,-3C198.3,-2.1,198.6,-1.1,198.6,-0C198.6,1.1,198.3,2.1,197.8,3L203,-0" stroke-linecap="round" stroke="#323232"/>
+                <rect y="-11" fill="#ffffff" width="105.7" x="45" height="22"/>
+                <text class="st2" xml:space="preserve">
+                    <tspan y="8" x="55">normalizers</tspan>
+                </text>
+            </g>
+            <g id="shape6" transform="translate(522.5,236)">
+                <path fill="none" d="M0,0L0,82.6L-416,82.6L-416,-155.5" stroke="#323232"/>
+                <path fill="#323232" stroke-width="1" d="M-416,-159.9L-419,-154.7C-418.1,-155.2,-417.1,-155.5,-416,-155.5C-414.9,-155.5,-413.9,-155.2,-413,-154.7L-416,-159.9" stroke-linecap="round" stroke="#323232"/>
+                <rect y="71.6" fill="#ffffff" width="355.1" x="-395.5" height="22"/>
+                <text class="st2" xml:space="preserve">
+                    <tspan y="90.6" x="-355.5">molecule deserialization implementation</tspan>
+                </text>
+            </g>
+            <g id="shape7" transform="translate(522.5,76.15)">
+                <path fill="none" d="M0,0L0,79.3" stroke="#323232"/>
+                <path fill="#323232" stroke-width="1" d="M0,83.7L3,78.5C2.1,79,1.1,79.3,0,79.3C-1.1,79.3,-2.1,79,-3,78.5L0,83.7" stroke-linecap="round" stroke="#323232"/>
+                <rect y="29.7" fill="#ffffff" width="333.8" x="-165.9" height="22"/>
+                <text class="st2" xml:space="preserve">
+                    <tspan y="48.7" x="-165.9">molecule serialization implementation</tspan>
+                </text>
+            </g>
+        </g>
+        <g id="shape8" transform="translate(203.5,510)">
+            <path fill="#133a77" d="M255,57L255,0L0,0L0,57L255,57z" fill-rule="evenodd"/>
+            <text class="st1" xml:space="preserve">
+                <tspan y="36.5" x="22.8">Generate-message-tool</tspan>
+            </text>
+        </g>
+        <g id="shape9" transform="translate(203.5,0)">
+            <path fill="#7cc2f2" d="M255,57L255,0L0,0L0,57L255,57z" fill-rule="evenodd"/>
+            <text class="st1" xml:space="preserve">
+                <tspan y="36.5" x="89.6">Felix bot</tspan>
+            </text>
+        </g>
+        <g id="shape10" transform="translate(331,57)">
+            <path fill="none" d="M0,0L0,30" stroke="#323232"/>
+            <path fill="#323232" stroke-width="1" d="M0,34.4L3,29.2C2.1,29.7,1.1,30,0,30C-1.1,30,-2.1,29.7,-3,29.2L0,34.4" stroke-linecap="round" stroke="#323232"/>
+        </g>
+        <g id="shape11" transform="translate(331,510)">
+            <path fill="none" d="M0,0L0,-33.6" stroke="#323232"/>
+            <path fill="#323232" stroke-width="1" d="M0,-38L-3,-32.8C-2.1,-33.3,-1.1,-33.6,0,-33.6C1.1,-33.6,2.1,-33.3,3,-32.8L0,-38" stroke-linecap="round" stroke="#323232"/>
+        </g>
+    </g>
+</svg>

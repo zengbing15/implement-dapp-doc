@@ -1,0 +1,66 @@
+<svg xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 674 308" width="674" xmlns="http://www.w3.org/2000/svg" height="308">
+    <style type="text/css"><![CDATA[
+.st1 {fill:#ffffff;font-family:微软雅黑;font-size:13.5pt}
+.st2 {font-family:.AppleSystemUIFont}
+]]></style>
+    <defs/>
+    <g transform="translate(1,1)">
+        <path fill="#b4b4b4" id="shape1" d="M0,0L231,0L231,175L0,175L0,0z" transform="translate(1.15,131)" fill-rule="evenodd"/>
+        <g id="shape2" transform="translate(-0,-0)">
+            <path fill="#b4b4b4" d="M231,37L231,0L0,0L0,37L231,37z" fill-rule="evenodd"/>
+            <text class="st1" xml:space="preserve">
+                <tspan y="26.5" x="90.1">Client</tspan>
+            </text>
+        </g>
+        <g id="shape3" transform="translate(25.15,151)">
+            <path fill="#ffdcac" d="M189,37L189,0L0,0L0,37L189,37z" fill-rule="evenodd"/>
+            <text class="st1" xml:space="preserve">
+                <tspan y="26.5" x="57.8">Botgram</tspan>
+            </text>
+        </g>
+        <g id="shape4" transform="translate(25.15,245.5)">
+            <path fill="#08488f" d="M189,37L189,0L0,0L0,37L189,37z" fill-rule="evenodd"/>
+            <text class="st1" xml:space="preserve">
+                <tspan y="26.5" x="65.6">Lumos</tspan>
+            </text>
+        </g>
+        <g id="shape5" transform="translate(1.15,93)">
+            <path fill="#b4b4b4" d="M231,37L231,0L0,0L0,37L231,37z" fill-rule="evenodd"/>
+            <text class="st1" xml:space="preserve">
+                <tspan y="26.5" x="74">Back-end</tspan>
+            </text>
+        </g>
+        <g id="shape6" transform="translate(351.15,151)">
+            <path fill="#00aeee" d="M321,37L321,0L0,0L0,37L321,37z" fill-rule="evenodd"/>
+            <text class="st1" xml:space="preserve">
+                <tspan y="26.5" x="72.4">Telegram bot Server</tspan>
+            </text>
+        </g>
+        <g id="shape7" transform="translate(352.58,245.5)">
+            <path fill="#08488f" d="M319.6,37L319.6,0L0,0L0,37L319.6,37z" fill-rule="evenodd"/>
+            <text class="st1" xml:space="preserve">
+                <tspan y="26.5" x="103.3">CKB Network</tspan>
+            </text>
+        </g>
+        <g id="shape8" transform="translate(232.15,145.5)">
+            <path fill="#00aeee" d="M0,24L24,0L24,14.4L95,14.4L95,0L119,24L95,48L95,33.6L24,33.6L24,48L0,24z" fill-rule="evenodd"/>
+            <text class="st1" xml:space="preserve">
+                <tspan y="32" class="st2" x="36.5">HTTP</tspan>
+            </text>
+        </g>
+        <g id="shape9" transform="translate(232.15,240)">
+            <path fill="#08488f" d="M0,24L24,0L24,14.4L95,14.4L95,0L119,24L95,48L95,33.6L24,33.6L24,48L0,24z" fill-rule="evenodd"/>
+            <text class="st1" xml:space="preserve">
+                <tspan y="32" class="st2" x="42.2">RPC</tspan>
+            </text>
+        </g>
+        <g id="shape10" transform="translate(116.65,37)">
+            <path fill="none" d="M0,0L0,51.6" stroke="#323232"/>
+            <path fill="#323232" stroke-width="1" d="M0,56L3,50.8C2.1,51.3,1.1,51.6,0,51.6C-1.1,51.6,-2.1,51.3,-3,50.8L0,56" stroke-linecap="round" stroke="#323232"/>
+        </g>
+        <g id="shape11" transform="translate(119.65,188)">
+            <path fill="none" d="M0,0L0,53.1" stroke="#323232"/>
+            <path fill="#323232" stroke-width="1" d="M0,57.5L3,52.3C2.1,52.8,1.1,53.1,0,53.1C-1.1,53.1,-2.1,52.8,-3,52.3L0,57.5" stroke-linecap="round" stroke="#323232"/>
+        </g>
+    </g>
+</svg>
