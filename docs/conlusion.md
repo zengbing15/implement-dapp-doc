@@ -55,10 +55,10 @@ Now A hackathon is ongoing and Nervos Fundation is one of the sponsors,see [Gitc
     * [Mercury](https://github.com/nervosnetwork/mercury): A tool that handles applications development on CKB.
 * Blogs
     * [Jan Xie's medium blog](https://medium.com/@janhxie): Introduce the Nervos Network architecture design.
-    * [Xuejie's space](https://xuejie.space/): Introduce Nervos CKB Programing model.
+    * [Xuejie's space](https://xuejie.space/): Introduce Nervos CKB Programming model.
 
 ## Contact & Support
 
 If you find issues with the document site or have suggestions on how to improve the documentation, please [file an issue](https://github.com/zengbing15/implement-dapp-docs) for me, or send a email at [zengb@cryptape.com](mailto:zengb@cryptape.com).
 
-If you run into issues with Nervos CKB, you can create a post on  [Nervos Talk](https://talk.nervos.org/)  or join [Discord](https://discord.com/invite/AqGTUE9). Welcome to contact with us!
+If you run into issues with DApps development on Nervos CKB, you can create a post on  [Nervos Talk](https://talk.nervos.org/)  or join [Discord](https://discord.com/invite/AqGTUE9). Welcome to contact with us!
