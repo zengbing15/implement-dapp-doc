@@ -4,14 +4,13 @@ title: Transfer-Tx DApp demo
 sidebar_position: 4
 ---
 
-You've understood the important data strucure: Cell, Script and Transaction, so you can start to develop some simple DApp demos now.
+You've understood the important data strucure: Cell, Script and Transaction, now you can start to develop some simple DApp demos now.
 
-But can such a complex transaction code be built manually?
-Of course not.
-[Lumos](https://github.com/nervosnetwork/lumos) is an open-source framework that was developed by the developers team from [Cryptape](https://www.cryptape.com/join), for building DApps on CKB.You can use lumos to build transactions on your own.
+Maybe you have a question, could such a complex transaction code only be built manually?    
+Of course not.    
+[Lumos](https://github.com/nervosnetwork/lumos) is an open-source framework that was developed by the developers team from [Cryptape](https://www.cryptape.com/join) for building DApps on CKB.You can use lumos to build transactions on your own.
 
-You've already experienced the RPC component of lumos on [RPC](rpc-and-transaction#RPC).
-The transfer-tx DApp demo is based on Lumos functionalities to implement the most basic functions. In the process of the transfer-tx DApp development,you can understand more functions and utilities about lumos.
+ The transfer-tx DApp demo is based on Lumos functionalities to implement the most basic functions. You've already experienced the RPC component of lumos on [RPC](rpc-and-transaction#RPC). In the process of the transfer-tx DApp development, you can understand more functions and utilities about lumos.
 
 ## Project Structure
 
@@ -21,35 +20,15 @@ The full code of the example can be found [here](https://github.com/zengbing15/s
 transfer-tx-dapp-demo
 ├── accounts.js
 ├── index.js
-└──package.json
+└── package.json
 ```
 
 ## Prerequisites
 
 * See [Set Up the Development Environment](https://cryptape.github.io/lumos-doc/docs/preparation/setupsystem).
-* Prepare two CKB accounts, Alice and Bob, see [Create Accounts](https://cryptape.github.io/lumos-doc/docs/preparation/createaccount). The payer is Alice and the recipient is Bob.
+* Prepare two CKB accounts, Alice and Bob, see [Create CKB accounts](rpc-and-transaction#create-ckb-accounts). The payer is Alice and the recipient is Bob.
 *  Specify Alice as the miner to receive mining rewards, see [Step 5. Get CKB capacity for the account of Alice](https://cryptape.github.io/lumos-doc/docs/reference/ckbaccount#step-5-get-ckb-capacity-for-the-account-of-alice).
 * Update `accounts.js` file.
-
-```javascript title="/transfer-tx-dapp-demo/accounts.js"
-
-const ALICE = {
-    PRIVATE_KEY:`${ALICE's private_key}`,
-    ADDRESS:`${ALICE's private_key}`,
-    ARGS:`${ALICE's args}`
-}
-
-const BOB = {
-    PRIVATE_KEY:`${BOB's private_key}`,
-    ADDRESS:`${BOB's private_key}`,
-    ARGS:`${BOB's args}`
-}
-
-module.exports = {
-    ALICE,
-    BOB,
-}
-```
 
 ## Set up the Configuration for Lumos
 
@@ -75,7 +54,6 @@ const { initializeConfig, getConfig } = require("@ckb-lumos/config-manager");
 process.env.LUMOS_CONFIG_FILE = process.env.LUMOS_CONFIG_FILE || './config.json'
 initializeConfig();
 const CKB_CONFIG = getConfig();
-
 ```
 
 ### Step2: Set Up the Lumos Indexer
@@ -87,7 +65,6 @@ $ yarn add @ckb-lumos/indexer
 ```
 
 Example usage:
-
 ```javascript
 const {Indexer} = require("@ckb-lumos/indexer");
 const CKB_RPC_URI = process.env.CKB_RPC_URI || "http://127.0.0.1:8114";
@@ -114,8 +91,6 @@ The helpers component (`@ckb-lumos/helpers`) defines interfaces, types and utili
 $ yarn add @ckb-lumos/common-scripts
 $ yarn add @ckb-lumos/helpers
 ```
-
-
 Example usage:
 
 ```javascript {4,5,7}
@@ -179,7 +154,7 @@ Example usage:
 
 ### Step3: Prepare the signing entries 
 
-Use[prepareSigningEntries](https://nervosnetwork.github.io/lumos/modules/common_scripts.html#preparesigningentries-12) in `@ckb-lumos/common-scripts` to add the signing entries to the transaction skeleton. The result is a raw transaction that requires signatures.
+Use [prepareSigningEntries](https://nervosnetwork.github.io/lumos/modules/common_scripts.html#preparesigningentries-12) in `@ckb-lumos/common-scripts` to add the signing entries to the transaction skeleton. The result is a raw transaction that requires signatures.
 
 Example usage:
 
@@ -211,11 +186,11 @@ const hexmessage = new Reader(message).serializeJson();
 const signature = key.signRecoverable(hexmessage, ALICE.PRIVATE_KEY);
 ```
 
-About `Reader` class：Use [Reader class](https://github.com/nervosnetwork/ckb-js-toolkit#reader) in [ckb-js-toolkit](https://github.com/nervosnetwork/ckb-js-toolkit#reader) to transfer `message`'s format to `Hex string`.Because reader class serves a unique purpose: depending on sources of data, we might get values in different formats. 
+About `Reader` class：Use [Reader class](https://github.com/nervosnetwork/ckb-js-toolkit#reader) in CKB-JS-Toolkit to transfer `message`'s format to `Hex string`.Because in the process of development on DApps you should convert values in specific formats.
 
 ### Step5: Seal the transaction
 
-Use [sealTransaction](https://nervosnetwork.github.io/lumos/modules/helpers.html#sealtransaction) in @ckb-lumos/helpers to seal the transaction with `txSkeleton` and `signature`.The transaction is built.
+Use [sealTransaction](https://nervosnetwork.github.io/lumos/modules/helpers.html#sealtransaction) in `@ckb-lumos/helpers` to seal the transaction with `txSkeleton` and `signature`.The transaction is built.
 
 ```javascript
 const {sealTransaction} = require("@ckb-lumos/helpers");
@@ -227,8 +202,8 @@ console.log(JSON.stringify(tx,null,2))
 
 ### Step6: Send the finalized transaction to the CKB network
 
-Remember when we  use `@ckb-lumos/rpc` to get blockchain info,see [Connect to CKB node through RPC](rpc-and-transaction#connect-to-ckb-node-through-rpc)?    
-Now use `@ckb-lumos/rpc` to send the transaction to the CKB network.
+Remember you have experienced `@ckb-lumos/rpc` in [Connect to CKB node through RPC](rpc-and-transaction#connect-to-ckb-node-through-rpc)?    
+Now you can use `@ckb-lumos/rpc` to send the transaction to the CKB network.
 
 ```bash
 $ yarn add @ckb-lumos/rpc
@@ -256,14 +231,16 @@ The DApp can assemble a transaction in the following steps:
     * Step1: Set up the Config Manager
     * Step2: Set up the Lumos Indexer
 * Build the Transfer Transaction
-    * Step1:Create a transaction skeleton
+    * Step1: Create a transaction skeleton
     * Step2: Add the transaction fee
     * Step3: Prepare the signing entries 
     * Step4: Sign the transaction
     * Step5: Seal the transaction
     * Step6: Send the finalized transaction to the CKB network
 
-You have implemented the simple DApp demo.In the process, you almost learned about all lumos components. Well done! For more information about lumos, see [lumos-doc](https://cryptape.github.io/lumos-doc/).
+You have developed your first DApp demo.In the process, you have learned about almost all lumos components.     
+Well done!     
+For more information about lumos, see [lumos-doc](https://cryptape.github.io/lumos-doc/).
 
 ## TroubleShooting
 
@@ -272,7 +249,6 @@ When you generate the `config.json` file, may encounter binary execution error:
 ```bash
 dyld: malformed mach-o image: segment __DWARF has vmsize < filesize
 [1] 35570 abort ./lumos-config-generator config.json
-
 ```
 The reason is that if macOS is upgraded to Catalina, there is a problem with golang execution.    
 Use `go build -ldflags "-w"` to compile source code.
@@ -287,13 +263,15 @@ $ go build -ldflags "-w"
 
 ## Generation offline Validation online
 
-DApps on CKB layer1 separate the generation and verification of state. The state can be generated offline and verified online, see [State Generation and Verification](https://github.com/nervosnetwork/rfcs/blob/master/rfcs/0002-ckb/0002-ckb.md#41-state-generation-and-verification). 
+DApps on CKB layer1 separate the generation and verification of state. The state can be generated offline and verified online, see [State Generation and Verification](https://github.com/nervosnetwork/rfcs/blob/master/rfcs/0002-ckb/0002-ckb.md#41-state-generation-and-verification).     
+
 After the transaction has been built offline, the state is already determined by `outputs`. The transaction is committed online just for validating the legitimacy. That is why lumos can be used to build transactions offline.
 
-If you know about Ethereum, have you found the difference between CKB and Ethereum?
+If you know about DApps developments on Ethereum, have you found the difference between CKB and Ethereum?
 
-On Ethereum, the transaction includes `calldata` and smart contracts.After the transaction is comitted, the EVM on the chain executes the transaction which means that the smart contracts are deployed and executed, then the account's data is modified and a new world state is obtained. In summary, The state should be determined after the transaction is committed.Therefore, there is essential difference between Nervos CKB and Ethereum.
+On Ethereum, the transaction includes `calldata` and smart contracts.After the transaction is committed, the EVM online executes the transaction then the smart contracts are deployed and executed, then the account's data is modified and a new world state is obtained. Which means that The state should be determined after the transaction is committed.This is the essential difference between Nervos CKB and Ethereum.
 
 But does this means Ethereum DApp developers who want to develop on CKB have to abandon their previous development habits and learn a new set of programming models and tools?    
-Of course not! The reason will be revealed in [Stay tuned](conclusion#stay-tuned).
+Of course not!    
+The reason will be revealed in [Stay tuned](conclusion#stay-tuned).
 :::
