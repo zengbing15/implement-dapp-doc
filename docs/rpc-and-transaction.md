@@ -29,7 +29,9 @@ The client side of web apps and DApps are almost the same, you should focus on t
 
 ## RPC
 
-First run a CKB node,then use @ckb-lumos/rpc (the RPC component in [Lumos](https://github.com/nervosnetwork/lumos)) to interact with CKB network，communicating block and transaction information with CKB nodes.
+Nervos CKB exposes a set of RPCs in [JSON-RPC](https://www.jsonrpc.org/specification) 2.0 protocols for interactions,see [JSON-RPC](https://docs.nervos.org/docs/reference/rpc).
+
+First run a CKB node,then use [RPC](https://nervosnetwork.github.io/lumos/modules/rpc.html) in @ckb-lumos/rpc (the RPC component in [Lumos](https://github.com/nervosnetwork/lumos)) to interact with CKB network，communicating block and transaction information with CKB nodes.
 
 :::info
 Lumos is a very handy development tool. CKB DApps can be developed upon lumos. [A transfer-tx DApp demo](transfer-tx-dapp-demo) will introduce how to develop DApps upon lumos step by step. 

@@ -202,8 +202,8 @@ console.log(JSON.stringify(tx,null,2))
 
 ### Step6: Send the finalized transaction to the CKB network
 
-Remember you have experienced `@ckb-lumos/rpc` in [Connect to CKB node through RPC](rpc-and-transaction#connect-to-ckb-node-through-rpc)?    
-Now you can use `@ckb-lumos/rpc` to send the transaction to the CKB network.
+Remember you have experienced `@ckb-lumos/rpc` in [RPC](rpc-and-transaction#rpc)?    
+The rpc component (`@ckb-lumos/rpc`）can provide type definitions for CKB RPC interface.Now you can use `@ckb-lumos/rpc` to send the transaction to the CKB network.
 
 ```bash
 $ yarn add @ckb-lumos/rpc
