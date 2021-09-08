@@ -59,6 +59,6 @@ Now A hackathon is ongoing and Nervos Fundation is one of the sponsors,see [Gitc
 
 ## Contact & Support
 
-If you find issues with the document site or have suggestions on how to improve the documentation, please [file an issue](https://github.com/zengbing15/implement-dapp-docs) for me, or send a email at [zengb@cryptape.com](mailto:zengb@cryptape.com).
+If you find issues with the document site or have suggestions on how to improve the documentation, please [file an issue](https://github.com/zengbing15/implement-dapp-docs) for me, or email me at [zengb@cryptape.com](mailto:zengb@cryptape.com).
 
 If you run into issues with DApps development on Nervos CKB, you can create a post on  [Nervos Talk](https://talk.nervos.org/)  or join [Discord](https://discord.com/invite/AqGTUE9). Welcome to contact with us!
