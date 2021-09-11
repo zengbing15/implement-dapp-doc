@@ -14,6 +14,21 @@ module.exports = {
   projectName: 'implement-dapp-docs', // Usually your repo name.
   plugins: ['docusaurus-plugin-sass'],
   themeConfig: {
+    algolia: {
+      apiKey: 'b265f8b6d52283b021d56b5e88de1c2e',
+      indexName: 'implement-dapp-doc',
+
+      // Optional: see doc section below
+      contextualSearch: true,
+
+      // Optional: see doc section below
+      //appId: 'YOUR_APP_ID',
+
+      // Optional: Algolia search parameters
+      searchParameters: {},
+
+      //... other Algolia params
+    },
     navbar: {
       title: 'Develop your first DApp',
       logo: {
