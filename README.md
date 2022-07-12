@@ -1,6 +1,6 @@
-# Implement DApp Docs
+# Develop your first DApp on CKB
 
-[Implement DApp Docs link](https://zengbing15.github.io/implement-dapp-docs/)
+[Develop your first DApp on CKB docs link](https://zengbing15.github.io/implement-dapp-docs/)
 
 This website is built using [Docusaurus 2](https://docusaurus.io/), a modern static website generator.
 
